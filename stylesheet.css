@@ -1,0 +1,144 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+body {
+  /* background-color: #1a1a1a; */
+  background-color: #2c3e50;
+  color: #cfd8dc;
+}
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  padding-top: 20px;
+}
+.btn {
+  appearance: button;
+  background-color: #1899D6;
+  border: solid transparent;
+  border-radius: 5px;
+  border-width: 0 0 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: din-round,sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  line-height: 20px;
+  outline: none;
+  overflow: visible;
+  padding: 13px 16px;
+  text-align: center;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  transition: filter .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 170px;
+	margin: 0 auto;
+}
+.btn:after {
+  background-clip: padding-box;
+  background-color: #1CB0F6;
+  border: solid transparent;
+  border-radius: 5px;
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+.btn:main,
+.btn:focus {
+  user-select: auto;
+}
+.btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+.btn:disabled {
+  cursor: auto;
+}
+.btn:active {
+  transition: .25s;
+  transform: scale(0.9);
+}
+.list-container {
+  font-family: monospace;
+  font-size: 14px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  margin-bottom: 20px;
+  height: 200px;
+  width: 150px;
+  overflow-y: scroll;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.list-container > div {
+  margin-bottom: 6px;
+}
+.char {
+  font-size: 16px;
+  font-weight: bold;
+  width: 50px;
+  height: 50px;
+  border: 1px solid lightgrey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  background-color: #939598;
+}
+.grey {
+  background-color: #939598;
+}
+.yellow {
+  background-color: #b59f3b;
+}
+.green {
+  background-color: #538d4e;
+}
+.input-field {
+  color: #333;
+  font-size: 1.2rem;
+  width: 150px;
+  height: 30px;
+	margin: 0 auto;
+  margin-bottom: 10px;
+  padding: 0.5rem 0.5rem;
+  border-radius: 0.2rem;
+  background-color: rgb(255, 255, 255);
+}
+.banner {
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+}
+.description {
+    margin-top: 20px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+.guesses {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.guess {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}

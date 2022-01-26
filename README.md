@@ -1,22 +1,15 @@
 # wordlsolver
 
-A Clojure library designed to ... well, that part is up to you.
+Helps you solve wordle puzzles. 
+
+![image](https://user-images.githubusercontent.com/56522/151093999-b0d8b924-1c6f-4436-981e-387ab5172a63.png)
 
 ## Usage
 
-FIXME
+`bb wordlsolver.clj`
 
-## License
+## Why
 
-Copyright © 2022 FIXME
+A co-worker wrote this in vue, and I was looking for an opportunity to play around with babashka/scittle.
 
-This program and the accompanying materials are made available under the
-terms of the Eclipse Public License 2.0 which is available at
-http://www.eclipse.org/legal/epl-2.0.
-
-This Source Code may also be made available under the following Secondary
-Licenses when the conditions for such availability set forth in the Eclipse
-Public License, v. 2.0 are satisfied: GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or (at your
-option) any later version, with the GNU Classpath Exception which is available
-at https://www.gnu.org/software/classpath/license.html.
+Took too long, but the solver turned out to be difficult to write.

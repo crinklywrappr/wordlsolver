@@ -1,0 +1,18 @@
+{:paths ["."]
+ :tasks
+ {:requires ([hiccup.core :refer [html]]
+             [selmer.parser :refer [add-tag! render render-file] :as sr]
+             [clojure.java.io :as io]
+             [clojure.edn :as edn])
+
+  ;; NOTE: some bug w/ selmer causes `render` to throw an exception
+  ;; NOTE: may fall over w/ multiple nested hiccup templates due to reusing tmp file
+  :init (add-tag! :includehiccup
+                  (fn [[file] context-map]
+                    (let [tmp "tmp.out"
+                          x (spit tmp (html (edn/read-string (slurp file))))
+                          out (render-file tmp context-map)]
+                      (io/delete-file tmp)
+                      out)))
+
+  gen (spit "index.html" (render "{% includehiccup index.edn %}" {}))}}

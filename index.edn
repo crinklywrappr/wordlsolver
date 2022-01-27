@@ -1,0 +1,16 @@
+[:html
+ [:head
+  [:meta {:charset "UTF-8"}]
+  [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
+  [:style "{% include \"stylesheet.css\" %}"]
+  [:script {:crossorigin nil :src "https://unpkg.com/react@17/umd/react.production.min.js"}]
+  [:script {:crossorigin nil :src "https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"}]
+  [:script {:src "https://cdn.jsdelivr.net/gh/borkdude/scittle@0.0.1/js/scittle.js" :type "application/javascript"}]
+  [:script {:src "https://cdn.jsdelivr.net/gh/borkdude/scittle@0.0.1/js/scittle.reagent.js" :type "application/javascript"}]
+  [:script {:src "https://cdn.jsdelivr.net/gh/borkdude/scittle@0.0.1/js/scittle.cljs-ajax.js" :type "application/javascript"}]
+  [:title "wordlsolver"]]
+ [:body
+  [:div {:id "app"}]
+  [:script {:type "application/x-scittle"} "{% include \"wordlsolver.cljs\" %}"]]]
+
+

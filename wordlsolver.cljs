@@ -20,7 +20,7 @@
 
 (def guesses (r/atom []))
 
-(def words (r/atom nil))
+(def words (map s/upper-case {% include "words.json" %}))
 
 ;; utility fns
 
@@ -186,7 +186,7 @@
    [:button.btn {:type "submit"} "GUESS"]])
 
 (defn possible-words []
-  (let [words (filter-words @words)]
+  (let [words (filter-words words)]
     [:div
      [:div (str "Possible words (" (count words) ")")]
      [:div.list-container
@@ -203,9 +203,5 @@
       [guess word i])]
    [possible-words]
    [guess-form]])
-
-(GET "/words"
-  {:headers {"Accept" "application/json"}
-   :handler #(reset! words (map s/upper-case %))})
 
 (dom/render [home] (.getElementById js/document "app"))

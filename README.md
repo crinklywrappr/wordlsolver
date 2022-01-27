@@ -6,7 +6,7 @@ Helps you solve wordle puzzles.
 
 ## Usage
 
-`bb wordlsolver.clj`
+`bb gen` to generate static page, then open `index.html` in your browser.
 
 ## Why
 

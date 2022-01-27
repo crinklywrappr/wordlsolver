@@ -2,17 +2,43 @@
  :tasks
  {:requires ([hiccup.core :refer [html]]
              [selmer.parser :refer [add-tag! render render-file] :as sr]
+             [clojure.string :as sg]
              [clojure.java.io :as io]
              [clojure.edn :as edn])
 
-  ;; NOTE: some bug w/ selmer causes `render` to throw an exception
-  ;; NOTE: may fall over w/ multiple nested hiccup templates due to reusing tmp file
-  :init (add-tag! :includehiccup
-                  (fn [[file] context-map]
-                    (let [tmp "tmp.out"
-                          x (spit tmp (html (edn/read-string (slurp file))))
-                          out (render-file tmp context-map)]
-                      (io/delete-file tmp)
-                      out)))
+  :init (do
+          (def out {:files {}
+                    :strings {"index.html" ["{% includehiccup index.edn %}"]}})
 
-  gen (spit "index.html" (render "{% includehiccup index.edn %}" {}))}}
+          (def tmpdir (io/file ".tmp/"))
+
+          (defn mktemp [suffix]
+            (str (java.io.File/createTempFile "wordlsolver" suffix tmpdir)))
+
+          ;; NOTE: render bug forces temp file creation: https://github.com/yogthos/Selmer/issues/278
+          (add-tag! :includehiccup
+                    (fn [[file & [options]] context-map]
+                      (let [tmp (mktemp (sg/replace file "." ""))
+                            x (spit tmp (html (edn/read-string (slurp file))))]
+                        (render-file tmp context-map)))))
+
+  :enter (.mkdir tmpdir)
+
+  :leave (do
+           (doseq [f (.listFiles tmpdir)]
+             (io/delete-file f))
+           (io/delete-file ".tmp/"))
+
+  gen (do
+        (doseq [[out in] (:files out)
+                :let [in (conj (if (vector? in) in [in]) {} {})]]
+          (io/make-parents out)
+          (spit out (apply render-file in)))
+
+        (doseq [[out in] (:strings out)
+                :let [in (conj (if (vector? in) in [in]) {} {})]]
+          (io/make-parents out)
+          (spit out (apply render in))))
+
+  clean (doseq [f (concat (keys (:files out)) (keys (:strings out)))]
+          (io/delete-file f))}}

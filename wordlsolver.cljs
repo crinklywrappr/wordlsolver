@@ -126,21 +126,17 @@
       a v))
    {} @yellowlist))
 
-(defn replace-idx [smap v]
-  (reduce-kv
-   (fn [a k v]
-     (assoc a k v))
-   v smap))
-
 (defn unfit-letter? [[index letter]]
   (nil? ((get-possible-letters index) letter)))
 
 (defn unfit-subword? [word [letter ix]]
   (nil?
-   ((disj (set (replace-idx (into {} (map vector ix (repeat nil)))
-                            (vec word)))
-          nil)
-    letter)))
+   (reduce-kv
+    (fn [a k v]
+      (if ((set ix) k)
+        a (conj a v)))
+    #{} (vec word))
+   letter))
 
 (defn unfit-word? [indexed-yellows word]
   (or (some unfit-letter? (map-indexed vector word))
